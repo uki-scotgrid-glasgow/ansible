@@ -1,0 +1,3 @@
+- hosts: scotgrid 
+  roles:
+    - ipv6-disable

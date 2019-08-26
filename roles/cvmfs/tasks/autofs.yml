@@ -1,0 +1,16 @@
+## Install and enables AutoFS
+---
+- name: Install AutoFS
+  yum: name=autofs state=present
+
+- name: Enable service AutoFS
+  systemd:
+    name: autofs
+    enabled: yes
+    state: started
+
+- name: Set permissive mode in SELinux
+  selinux:
+    policy: targeted
+    state: permissive
+...

@@ -1,0 +1,33 @@
+# {{ ansible_managed }}
+{# The following line is false :) #}
+# Automatically created by Ansible using a template
+
+[paps]
+ngi_uk.type = remote
+ngi_uk.enabled = true
+ngi_uk.dn = /C=UK/O=eScience/OU=CLRC/L=RAL/CN={{ NGI_UK_HOSTNAME }}
+ngi_uk.hostname = {{ NGI_UK_HOSTNAME }}
+ngi_uk.port = {{ PAP_PORT }}
+ngi_uk.path = /pap/services/
+ngi_uk.protocol = https
+ngi_uk.public = false
+
+[paps:properties]
+ordering = ngi_uk
+ordering = default
+poll_interval = 3600
+
+[repository]
+consistency_check = true
+consistency_check.repair = false
+
+[security]
+certificate = /etc/grid-security/hostcert.pem
+private_key = /etc/grid-security/hostkey.pem
+
+[standalone-service]
+entity_id = http://{{ ansible_hostname }}/pap
+hostname = {{ ansible_hostname }}
+port = {{ PAP_PORT }}
+shutdown_port = {{ PAPSDOWN_PORT }}
+shutdown_command = shutdown

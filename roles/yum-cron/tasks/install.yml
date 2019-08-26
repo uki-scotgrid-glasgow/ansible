@@ -1,0 +1,11 @@
+- name: Install Yum auto-updater
+  yum:
+    name:
+      - yum-cron
+    state: present
+
+
+- name: Enable and start Yum auto-updater services
+  service: name={{ item }} enabled=yes state=started
+  with_items:
+    - yum-cron

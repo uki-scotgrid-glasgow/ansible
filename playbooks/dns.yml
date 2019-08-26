@@ -1,0 +1,13 @@
+- hosts: dns
+  roles:
+    - common
+    - ansible-prereq
+    - time
+    - yum-cron
+    - ssh-authorized-keys
+    - packages
+    - firewall-zones
+    - node_exporter
+    - dnsmasq
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml

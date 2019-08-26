@@ -1,0 +1,5 @@
+- name: Set up SSH authorized keys
+  authorized_key: user=root key={{ item }} state=present
+  with_file:
+    - "name.key"
+  tags: ssh

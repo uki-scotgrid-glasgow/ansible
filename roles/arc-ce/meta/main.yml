@@ -1,0 +1,4 @@
+dependencies:
+  - { role: repo-argus }
+  - { role: repo-nordugrid-6 }
+  - { role: repo-umd4 }

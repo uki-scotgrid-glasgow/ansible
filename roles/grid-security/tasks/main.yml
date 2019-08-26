@@ -1,0 +1,13 @@
+- name: Install grid packages
+  yum:
+    name:
+      - ca-policy-egi-core
+      - edg-mkgridmap
+      - fetch-crl
+      - umd-release
+    state: latest
+  tags: grid-security
+
+
+- name: Enable and start fetch-crl service
+  service: name=fetch-crl-cron state=started enabled=yes

@@ -1,0 +1,11 @@
+## ARC-CE main
+---
+- include: install.yml 
+  tags: arc-ce
+
+- include: ports.yml
+  tags: arc-ce
+
+- include: config.yml
+  tags: arc-ce
+...

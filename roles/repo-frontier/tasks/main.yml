@@ -1,0 +1,6 @@
+## Install Squid Frontier repository 
+---
+# Frontier 
+- name: Add Frontier repo
+  yum: name=http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm state=present
+...

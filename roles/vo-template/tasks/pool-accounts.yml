@@ -1,0 +1,20 @@
+## Create pool accounts on the CE and WorkNodes
+---
+- name: Ensure groups exist for pool accounts
+  group:
+    name:  "{{ item.group | default(item.user_prefix) }}"
+    gid:   "{{ item.gid }}"
+    state: present
+  tags: vo
+
+
+- name: Add pool accounts
+  user:
+    name:  "{{ item.user_prefix }}{{ item.id_format | default(vo_default_id_format) | format(id | int) }}"
+    uid:   "{{ item.first_uid + id | int - 1 }}"
+    group: "{{ item.group | default(item.user_prefix) }}"
+  with_sequence: start=1 count={{ item.num_accounts }}
+  loop_control:
+    loop_var: id
+  tags: vo
+...

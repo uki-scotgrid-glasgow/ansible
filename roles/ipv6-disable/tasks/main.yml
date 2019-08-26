@@ -1,0 +1,11 @@
+- name: Copy sysctl configuration file
+  copy: src={{ item }} dest=/etc/sysctl.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - 90-ipv6-disable.conf
+
+
+- name: Update sysctl
+  shell: sysctl -p /etc/sysctl.d/{{ item }}
+  with_items:
+    - 90-ipv6-disable.conf
+#  sysctl: reload=yes

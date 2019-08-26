@@ -1,0 +1,31 @@
+- name: Install node_exporter to /usr/sbin
+  copy:
+      src: node_exporter-{{ node_exporter_version }}.linux-amd64/node_exporter
+      dest: /usr/sbin/node_exporter
+      owner: root
+      group: root
+      mode: '0755'
+
+- name: Install node_exporter service description
+  copy:
+      src: node_exporter.service
+      dest: /etc/systemd/system/node_exporter.service
+      owner: root
+      group: root
+      mode: '0644'
+
+- name: Install node_exporter options file
+  copy:
+      src: sysconfig.node_exporter
+      dest: /etc/sysconfig/node_exporter
+      owner: root
+      group: root
+      mode: '0644'
+
+- name: Create Textfile Collector directory
+  file:
+      path: /var/lib/node_exporter/textfile_collector
+      state: directory
+      owner: root
+      group: root
+      mode: '0755' 

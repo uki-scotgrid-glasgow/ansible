@@ -1,0 +1,5 @@
+dependencies:
+  - { role: repo-epel }
+  - { role: repo-argus }
+  - { role: repo-umd4 }
+  - { role: repo-globus }

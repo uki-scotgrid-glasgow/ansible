@@ -1,0 +1,8 @@
+# Starts & Enables the Squid Frontier service
+---
+- name: Make sure Frontier Squid service is running and enabled
+  systemd:
+    name: frontier-squid
+    state: started
+    enabled: yes
+...

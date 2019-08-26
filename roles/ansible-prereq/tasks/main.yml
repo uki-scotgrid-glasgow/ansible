@@ -1,0 +1,6 @@
+- name: Install dependencies for Ansible management
+  yum:
+    name:
+      - libselinux-python
+    state: present
+  tags: ansible

@@ -1,0 +1,46 @@
+- name: Create DHCP configuration files
+  template: src={{ item }}.j2 dest=/etc/dhcp/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - dhcpd.conf
+  notify:
+    - Restart DHCP
+
+
+- name: Copy DHCP host files
+  copy: src={{ item }} dest=/etc/dhcp/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - hosts.conf
+  notify:
+    - Restart DHCP
+
+
+- name: Create DHCP log directory
+  file: path={{ item }} state=directory owner=root group=root mode=0755
+  with_items:
+    - /var/log/dhcp
+
+
+- name: Configure DHCP logging
+  template: src=syslog.conf.j2 dest=/etc/rsyslog.d/dhcpd.conf owner=root group=root mode=0644
+  notify:
+    - Restart rsyslog
+
+
+- name: Configure DHCP log rotation
+  template: src=logrotate.j2 dest=/etc/logrotate.d/dhcp owner=root group=root mode=0644
+  notify:
+    - Restart rsyslog
+
+
+- name: Omit DHCP messages from syslog
+  debug: msg="Add {{ dhcp_log_facility }}.none to /var/log/messages in /etc/rsyslog.conf"
+
+
+- name: Configure firewalld
+  firewalld: zone=internal service=dhcp permanent=yes immediate=yes state=enabled
+
+
+- name: Enable and start DHCP service
+  service: name={{ item }} enabled=yes state=started
+  with_items:
+    - dhcpd

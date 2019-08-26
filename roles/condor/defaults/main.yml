@@ -1,0 +1,10 @@
+condor_config_dir:           "/etc/condor"
+condor_history_dir:          "/var/lib/condor/history"
+condor_event_log:            "/var/log/condor/EventLog"
+condor_persistent_dir:       "{{ condor_config_dir }}/glasgow"
+condor_script_dir:           "/usr/local/bin"
+fs_remote_dir:               "/srv/condor"
+condor_port_first:           30000
+condor_port_last:            32000
+job_default_requestmemory:   1024
+condor_daemons:              MASTER

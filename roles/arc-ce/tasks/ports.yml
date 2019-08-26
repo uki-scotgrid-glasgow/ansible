@@ -1,0 +1,30 @@
+## Enable ports
+---
+- name: Enable TCP on Internal port(s)
+  firewalld:
+    zone: internal
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - 443/tcp
+    - 2135/tcp
+    - 2811/tcp
+    - 9000-9300/tcp
+    - 9000-9300/udp
+  notify: Reload firewalld
+
+- name: Enable TCP on External port(s)
+  firewalld:
+    zone: external
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - 443/tcp
+    - 2135/tcp
+    - 2811/tcp
+    - 9000-9300/tcp
+    - 9000-9300/udp
+  notify: Reload firewalld
+...

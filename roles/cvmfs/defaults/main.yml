@@ -1,0 +1,9 @@
+## CVMFS local configuration: '/etc/cvmfs/default.local'
+---
+CVMFS_NFILES: 262144
+CVMFS_REPOSITORIES: 
+CVMFS_CACHE_BASE: /tmp/cache/cvmfs2/
+CVMFS_QUOTA_LIMIT: 20000
+#CVMFS_HTTP_PROXY: http://my.proyx.host:3128
+#CVMFS_HTTP_PROXY: DIRECT
+...

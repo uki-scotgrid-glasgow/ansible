@@ -1,0 +1,20 @@
+# Starts & Enables the ARGUS services (order matters: pap,pdp,pepd)
+---
+- name: Make sure ARGUS-PAP service is running and enabled
+  systemd:
+    name: argus-pap
+    state: started
+    enabled: yes
+
+- name: Make sure ARGUS-PDP service is running and enabled
+  systemd:
+    name: argus-pdp
+    state: started
+    enabled: yes
+
+- name: Make sure ARGUS-PEPD service is running and enabled
+  systemd:
+    name: argus-pepd
+    state: started
+    enabled: yes
+...

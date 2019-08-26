@@ -1,0 +1,43 @@
+## Basic tools and packages to be installed on (almost) every CentOS7 server
+---
+- name: Install packages (required)
+  yum:
+    name:
+      - rsync
+    state: latest
+
+- name: Install packages (general)
+  yum:
+    name:
+      - bzip2
+      - nano
+      - net-tools
+      - pciutils
+      - screen
+      - tree
+      - unzip
+      - vim
+      - vim-enhanced
+    state: latest
+
+- name: Install packages (admin)
+  yum:
+    name:
+      - bind-utils
+      - dhcping
+      - lsof
+      - lynx
+      - iftop
+      - iotop
+      - nmap
+      - nmap-ncat
+      - strace
+      - sysstat
+      - tcpdump
+      - telnet
+      - traceroute
+      - wget
+      - whois
+      - sysstat
+    state: latest
+...

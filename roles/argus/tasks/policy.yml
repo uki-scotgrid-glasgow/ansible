@@ -1,0 +1,14 @@
+# Create ARGUS policy files in '/etc/policies/'
+---
+- name: Creates directory /etc/policies
+  file: path=/etc/policies state=directory owner=root group=root mode=0775
+
+- name: Copy policy file into /etc/policies
+  copy: src={{ item }} dest=/{{ item }} owner=root group=root mode=0664 force=true
+  with_items:
+    - etc/policies/{{ fn_argus_policy }}
+
+- name: PAP add policies from file (apf)
+  shell: pap-admin apf /etc/policies/{{ fn_argus_policy }}
+...
+

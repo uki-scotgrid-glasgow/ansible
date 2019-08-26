@@ -1,0 +1,37 @@
+# Installs and Configures ARGUS
+---
+- name: Install ARGUS metapackage
+  yum: name=argus-authz state=installed
+
+- name: Configures PAP admin
+  template: >
+    src=etc/argus/pap/pap-admin.properties.j2
+    dest=/etc/argus/pap/pap-admin.properties
+    owner=root
+    group=root
+    mode=0644
+
+- name: Configures PAP.ini
+  template: >
+    src=etc/argus/pap/pap_configuration.ini.j2
+    dest=/etc/argus/pap/pap_configuration.ini
+    owner=root
+    group=root
+    mode=0644
+
+- name: Configures PDP.ini
+  template: >
+    src=etc/argus/pdp/pdp.ini.j2
+    dest=/etc/argus/pdp/pdp.ini
+    owner=root
+    group=root
+    mode=0644
+
+- name: Configures PEPD.ini
+  template: >
+    src=etc/argus/pepd/pepd.ini.j2
+    dest=/etc/argus/pepd/pepd.ini
+    owner=root
+    group=root
+    mode=0644
+...

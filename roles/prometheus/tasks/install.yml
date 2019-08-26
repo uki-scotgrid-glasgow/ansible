@@ -1,0 +1,8 @@
+- name: Install prometheus to /usr/sbin
+  copy:
+      src: prometheus-{{ prometheus_version }}.linux-amd64/prometheus
+      dest: /usr/sbin/prometheus
+      owner: root
+      group: root
+      mode: '0755'
+

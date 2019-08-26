@@ -1,0 +1,14 @@
+- include: install.yml
+  tags: prometheus
+
+- include: user.yml
+  tags: prometheus
+
+- include: config.yml
+  tags: prometheus
+
+- include: service.yml
+  tags: prometheus
+
+- include: ports.yml
+  tags: prometheus

@@ -1,0 +1,15 @@
+## Install pre-req. and  ARC-CE 
+---
+- name: Install ARC-CE
+  yum:
+    name:
+      - nordugrid-arc-arex
+      - nordugrid-arc-plugins-*
+      - nordugrid-arc-gridftpd
+      - nordugrid-arc-infosys-ldap
+      - bash-completion 
+      - python-argcomplete
+      - lcmaps
+      - lcmaps-plugins-c-pep
+      - lcmaps-plugins-verify-proxy
+    state: present

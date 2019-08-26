@@ -1,0 +1,26 @@
+vo_name:           Gluex 
+
+vo_accounts:
+  - user_prefix:   gluex
+    gid:           4001
+    first_uid:     4001
+    num_accounts:  10
+
+vo_voms_servers:
+  - hostname: gluex.phys.uconn.edu
+    port: 15014
+    dn: /DC=org/DC=incommon/C=US/ST=CT/L=Storrs/O=University of Connecticut/OU=Academic IT/CN=gluex.phys.uconn.edu 
+    ca_dn: /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA
+
+  - hostname: gryphn.phys.uconn.edu
+    port: 15014
+    dn: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=voms/gryphn.phys.uconn.edu
+    ca_dn: /DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1
+
+
+# Default directory locations
+fn_gridsec:        "/etc/grid-security"
+fn_mapdir:         "{{ fn_gridsec }}/gridmapdir"
+
+# Default values
+vo_default_id_format:   "%03d"

@@ -1,0 +1,22 @@
+## Configures & Starts ARC-CE
+---
+- name: Create local configuration (/etc/arc.conf)
+  template: src=etc/arc.conf dest=/etc/arc.conf owner=root group=root mode=0644
+  notify: Restart ARC-CE
+  #see: http://www.nordugrid.org/arc/arc6/admins/reference.html
+
+- name: Enable and Run Services (as configured)
+  shell: arcctl service enable --as-configured --now
+
+- name: Starts the ARC service
+  shell: arcctl service start --as-configured
+
+- name: Activate global python argcomplete 
+  shell: activate-global-python-argcomplete
+
+- name: Creates directory /etc/lcmaps/
+  file: path=/etc/lcmaps/ state=directory owner=root group=root mode=0775
+
+- name: Create local configuration (lcmaps.db)
+  template: src=etc/lcmaps/lcmaps.db dest=/etc/lcmaps/lcmaps.db owner=root group=root mode=0755
+...

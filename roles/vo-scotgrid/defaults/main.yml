@@ -1,0 +1,31 @@
+vo_name:           vo.scotgrid.ac.uk
+
+vo_accounts:
+  - user_prefix:   scotg
+    gid:           1001
+    first_uid:     2001
+    num_accounts:  10
+
+vo_voms_servers:
+  - hostname: voms.gridpp.ac.uk
+    port: 15509
+    dn: /C=UK/O=eScience/OU=Manchester/L=HEP/CN=voms.gridpp.ac.uk
+    ca_dn: /C=UK/O=eScienceCA/OU=Authority/CN=UK e-Science CA 2B
+
+  - hostname: voms02.gridpp.ac.uk
+    port: 15509
+    dn: /C=UK/O=eScience/OU=Oxford/L=OeSC/CN=voms02.gridpp.ac.uk
+    ca_dn: /C=UK/O=eScienceCA/OU=Authority/CN=UK e-Science CA 2B
+
+  - hostname: voms03.gridpp.ac.uk
+    port: 15509
+    dn: /C=UK/O=eScience/OU=Imperial/L=Physics/CN=voms03.gridpp.ac.uk
+    ca_dn: /C=UK/O=eScienceCA/OU=Authority/CN=UK e-Science CA 2B
+
+
+# Default directory locations
+fn_gridsec:        "/etc/grid-security"
+fn_mapdir:         "{{ fn_gridsec }}/gridmapdir"
+
+# Default values
+vo_default_id_format:   "%03d"

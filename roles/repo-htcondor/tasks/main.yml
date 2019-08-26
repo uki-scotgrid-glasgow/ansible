@@ -1,0 +1,12 @@
+## Configures the official HTCondor repository
+---
+# HTCondor repository
+- name: Install HTCondor gpg key
+  rpm_key: state=present key=https://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor
+
+- name: Download HTCondor repo 
+  get_url:
+    url: https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo
+    dest: /etc/yum.repos.d/htcondor-stable-rhel7.repo
+    mode: 0440
+...

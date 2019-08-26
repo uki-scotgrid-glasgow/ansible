@@ -1,0 +1,4 @@
+- name: Configure XRootD repository
+  copy: src={{ item }} dest=/etc/yum.repos.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - xrootd-stable-slc7.repo 

@@ -1,0 +1,5 @@
+- name: Configure EGI Trust Anchors repository
+  template: src={{ item }}.j2 dest=/etc/yum.repos.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - egi-trustanchors.repo
+  tags: egi-trustanchors

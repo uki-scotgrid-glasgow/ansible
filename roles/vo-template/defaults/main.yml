@@ -1,0 +1,25 @@
+# vo_name:              REQUIRED
+#
+# vo_accounts:
+#
+#   - user_prefix:      REQUIRED
+#     group:            OPTIONAL (default: user_prefix)
+#     gid:              REQUIRED
+#     first_uid:        REQUIRED
+#     num_accounts:     REQUIRED
+#     id_format:        OPTIONAL (default: vo_default_id_format)
+#
+# vo_voms_servers:
+#
+#   - hostname:         REQUIRED
+#     port:             REQUIRED
+#     dn:               REQUIRED
+#     ca_dn:            REQUIRED
+
+
+# Default directory locations
+fn_gridsec:        "/etc/grid-security"
+fn_mapdir:         "{{ fn_gridsec }}/gridmapdir"
+
+# Default values
+vo_default_id_format:   "%03d"

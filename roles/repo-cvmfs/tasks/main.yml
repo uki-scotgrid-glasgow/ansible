@@ -1,0 +1,6 @@
+## Install CernVM repository (CVMFS)
+---
+# CernVM repository
+- name: Add CernVM repo
+  yum: name=http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm  state=present
+...

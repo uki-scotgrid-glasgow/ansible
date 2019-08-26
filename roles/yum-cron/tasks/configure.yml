@@ -1,0 +1,5 @@
+- name: Copy Yum auto-updater configuration file
+  template: src={{ item }}.j2 dest=/etc/yum/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - yum-cron.conf
+    - yum-cron-hourly.conf

@@ -1,0 +1,6 @@
+- include: install.yml
+  tags: ppepixie
+
+
+- include: configure.yml
+  tags: ppepixie

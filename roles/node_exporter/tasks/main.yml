@@ -1,0 +1,11 @@
+- include: install.yml
+  tags: node_exporter
+
+- include: user.yml
+  tags: node_exporter
+
+- include: service.yml
+  tags: node_exporter
+
+- include: ports.yml
+  tags: node_exporter

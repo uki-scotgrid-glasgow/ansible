@@ -1,0 +1,26 @@
+## ARGUS server installer for ScotGrid Glasgow
+---
+- name: ARGUS complete installation and configuration
+  hosts: argus
+
+  roles:
+    - common
+    - ansible-prereq
+    - time
+    - yum-cron
+    - ssh-authorized-keys
+    - grid-security
+    - hostcerts
+    - firewall-zones
+    - packages
+    - argus
+    - vo-atlas
+    - vo-dteam
+    - vo-gluex
+    - vo-ops
+    - vo-scotgrid
+
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml
+    - /etc/ansible/vars/secure.yml
+...

@@ -1,0 +1,6 @@
+- include: install.yml
+  tags: nat
+
+
+- include: configure.yml
+  tags: nat

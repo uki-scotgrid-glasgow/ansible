@@ -1,0 +1,3 @@
+{% for voms_server in vo_voms_servers %}
+"{{ vo_name }}" "{{ voms_server.hostname }}" "{{ voms_server.port }}" "{{ voms_server.dn }}" "{{ vo_name }}"
+{% endfor %}

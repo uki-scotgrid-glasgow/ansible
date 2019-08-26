@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# jpk <john.kelly@stfc.ac.uk>  Mon Aug 26 19:29:15 BST 2013
+# Stolen wholesale from the batchenable script on the pbs farm.
+# 
+# Updated Mon Jul 21 09:57:05 BST 2014 so as not to kill CMs
+
+LOGGER="/usr/bin/env logger"
+CONDOR_RECONFIG="/usr/sbin/condor_reconfig"
+CONDOR_CONFIG_VAL="/usr/bin/condor_config_val"
+PARENT=`/bin/ps -p $PPID -o comm=`
+FILE1="/etc/condor/ral/.config.STARTD"
+
+# Prepare log message
+log_message="Batchdisabled by $USER via $PARENT"
+
+if [ -n "$SSH_CLIENT" ]; then
+  log_message="${log_message} from $SSH_CLIENT"
+fi
+
+if [ -f $FILE1 ]
+then
+        echo "File $FILE1 exists"
+fi
+
+$CONDOR_CONFIG_VAL -startd -set "Startjobs = False"
+
+$CONDOR_RECONFIG -daemon startd
+
+# Submit log message to syslog
+$LOGGER $log_message
+
+exit 0

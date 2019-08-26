@@ -1,0 +1,11 @@
+# Yum priority + EPEL
+---
+- name: Install yum-priorities plugin
+  yum: name=yum-priorities state=present
+
+- name: Install EPEL repository
+  yum:
+    name:
+      - epel-release
+    state: latest
+...

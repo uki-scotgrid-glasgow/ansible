@@ -1,0 +1,14 @@
+## ARGUS main 
+---
+- include: ports.yml
+  tags: argus
+
+- include: argus.yml
+  tags: argus
+
+- include: sstart.yml
+  tags: argus
+
+- include: policy.yml
+  tags: argus
+...

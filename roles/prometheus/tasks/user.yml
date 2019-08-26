@@ -1,0 +1,11 @@
+- name: Add a prometheus group
+  group:
+      name: prometheus
+      gid: 556
+
+
+- name: Add a prometheus user
+  user:
+      name: prometheus
+      uid: 556
+      group: prometheus

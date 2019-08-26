@@ -1,0 +1,5 @@
+## GitLab main 
+---
+- include: gitlab.yml
+  tags: gitlab
+...

@@ -1,0 +1,16 @@
+## Squid server installer
+---
+- hosts: squid 
+  roles:
+    - common
+    - ansible-prereq
+    - time
+    - yum-cron
+    - ssh-authorized-keys
+    - packages
+    - squid
+
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml
+...
+

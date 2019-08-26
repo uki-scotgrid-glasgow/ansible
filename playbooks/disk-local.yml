@@ -1,0 +1,11 @@
+- hosts: disk-local
+  roles:
+    - yum-cron
+    - time
+    - ssh-authorized-keys
+    - packages
+    - grid-security
+    - hostcerts
+    - xrootd-server
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml

@@ -1,0 +1,6 @@
+- name: Copy sysctl IP forwarding configuration
+  template: src={{ item }}.j2 dest=/etc/sysctl.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - 90-ipforward.conf
+  notify: Reload sysctl
+  tags: ipforward

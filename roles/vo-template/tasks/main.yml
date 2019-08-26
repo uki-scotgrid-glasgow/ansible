@@ -1,0 +1,40 @@
+# Create pool accounts and home directories on CEs and worker nodes
+- include_tasks: pool-accounts.yml
+  tags: vo
+  with_items:
+    - "{{ vo_accounts }}"
+  when: inventory_hostname in groups['ce']
+     or inventory_hostname in groups['compute']
+
+
+# Create vomsdir configuration everywhere
+- include: vomsdir.yml 
+  tags: vo
+
+
+# Create vomses configuration on worker nodes
+- include: vomses.yml
+  tags: vo
+  when: inventory_hostname in groups['compute']
+
+
+# Create mapfiles on Argus
+- include: mapfiles.yml
+  tags: vo
+  with_items:
+    - "{{ vo_accounts }}"
+  when: inventory_hostname in groups['argus']
+
+
+# Perform additional account configuration on Argus
+- include: argus-config.yml
+  tags: vo
+  with_items:
+    - "{{ vo_accounts }}"
+  when: inventory_hostname in groups['argus']
+
+
+# Perform additional configuration on ARC-CE
+- include: arc-ce-config.yml
+  tags: vo
+  when: inventory_hostname in groups['ce']

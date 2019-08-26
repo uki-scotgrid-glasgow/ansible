@@ -1,0 +1,6 @@
+- include: install.yml
+  tags: dhcp
+
+
+- include: configure.yml
+  tags: dhcp

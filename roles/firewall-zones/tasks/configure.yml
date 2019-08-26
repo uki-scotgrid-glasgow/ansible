@@ -1,0 +1,24 @@
+- name: Identify internal and external interfaces
+  site_facts_network:
+
+
+- debug:
+    msg: "Internal: {{ ansible_facts['if_internal'] }}  External: {{ ansible_facts['if_external'] }}"
+
+
+- name: Configure external interface
+  # firewalld: permanent=yes immediate=true interface={{ ansible_facts['if_external'] }} zone=external state=enabled
+  # Manual command required to work around known bug: https://github.com/ansible/ansible/issues/41738
+  command: /usr/bin/firewall-cmd --change-zone={{ ansible_facts['if_external'] }} --zone=external --permanent
+  when: ansible_facts['if_external'] != None
+
+
+- name: Remove services from external zone
+  firewalld: permanent=yes immediate=true zone=external service=ssh state=disabled
+
+
+- name: Configure internal interface
+  #firewalld: permanent=yes immediate=true interface={{ ansible_facts['if_internal'] }} zone=internal state=enabled
+  # Manual command required to work around known bug: https://github.com/ansible/ansible/issues/41738
+  command: /usr/bin/firewall-cmd --change-zone={{ ansible_facts['if_internal'] }} --zone=internal --permanent
+  when: ansible_facts['if_internal'] != None

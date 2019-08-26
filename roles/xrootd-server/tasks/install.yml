@@ -1,0 +1,7 @@
+- name: Install XRootD server
+  yum:
+    name:
+      - xrootd
+      - xrootd-client
+      - xrootd-server
+    state: latest

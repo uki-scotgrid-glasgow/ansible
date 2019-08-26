@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+{# The following line is false :) #}
+# Automatically created by Ansible using a template
+
+[SERVICE]
+entityId = http://{{ ansible_hostname }}/pdp
+hostname = {{ ansible_hostname }}
+port = {{ PDP_PORT }}
+adminPort = {{ PDPADMIN_PORT }}
+adminPassword = {{ PDPADMIN_PWD }}
+
+[POLICY]
+paps = https://{{ ansible_hostname }}:{{ PAP_PORT }}/pap/services/ProvisioningService
+retentionInterval = 240
+
+[SECURITY]
+servicePrivateKey = /etc/grid-security/hostkey.pem
+serviceCertificate = /etc/grid-security/hostcert.pem
+trustInfoDir = /etc/grid-security/certificates/
+enableSSL = true

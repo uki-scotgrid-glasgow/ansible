@@ -1,0 +1,23 @@
+# Create iNode files on ARGUS to enable pool-account mapping for the new VO
+---
+- name: Create map directory
+  file: path={{ fn_mapdir }} state=directory owner=root group=root mode=0770
+  tags: vo
+
+- name: Touch files for user mappings
+  copy: content="" dest={{ fn_mapdir }}/{{ item.user_prefix }}{{ item.id_format | default(vo_default_id_format) | format(id | int) }} force=no owner=root group=root mode=0644
+  with_sequence: start=1 count={{ item.num_accounts }}
+  loop_control:
+    loop_var: id
+  tags: vo
+
+# Updates ARGUS policy (to allow the new VO)
+- name: Add vo entry to Argus policy
+  lineinfile:
+    path: /etc/policies/{{ fn_argus_policy }}
+    line: "\t\trule permit { vo = \"{{ vo_name }}\" }"
+    insertafter: "^.*action \"\\.\\*\" {$"
+    state: present
+  tags: vo
+  notify: Update Argus policy
+...

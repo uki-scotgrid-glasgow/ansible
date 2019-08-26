@@ -1,0 +1,6 @@
+- name: Install UMD4 CentOS 7 repo
+  yum: name=http://repository.egi.eu/sw/production/umd/4/centos7/x86_64/base/umd-release-4.0.0-1.el7.noarch.rpm state=present
+
+
+- name: Install GPG key
+  rpm_key: state=present key=http://repository.egi.eu/sw/production/umd/UMD-RPM-PGP-KEY

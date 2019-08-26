@@ -1,0 +1,17 @@
+# Create vomsdir configuration everywhere
+---
+- name: Create VOMSDIR directory
+  file: path={{ item }} state=directory owner=root group=root mode=0755
+  with_items:
+    - "/etc/grid-security/vomsdir"
+
+
+- name: Create VOMSDIR sub-directories
+  file: path=/etc/grid-security/vomsdir/{{ vo_name }} state=directory owner=root group=root mode=0755
+
+
+- name: Create VOMSDIR entries
+  template: src=vomsdir.j2 dest=/etc/grid-security/vomsdir/{{ vo_name }}/{{ item.hostname }}.lsc owner=root group=root mode=0644
+  with_items:
+    - "{{ vo_voms_servers }}"
+...

@@ -1,0 +1,12 @@
+## Installs HTCondor 
+---
+- name: Install HTCondor 
+  yum: name=condor state=installed
+
+
+- name: Copy bespoke Condor scripts
+  copy: src={{ item }} dest={{ condor_script_dir }}/{{ item }} owner=root group=root mode=0755
+  with_items:
+    - condor_disable
+    - condor_enable
+...

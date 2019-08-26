@@ -1,0 +1,6 @@
+- include: install.yml
+  tags: xrootd
+
+
+- include: configure.yml
+  tags: xrootd

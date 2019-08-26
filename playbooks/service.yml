@@ -1,0 +1,15 @@
+# This is an example playbook which provides standard configuration
+# applicable to most systems.  It can be modified as necessary for
+# individual server types.
+
+#- hosts: HOSTGROUP
+#  roles:
+#    - common
+#    - ansible-prereq
+#    - time
+#    - yum-cron
+#    - ssh-authorized-keys
+#    - grid-security
+#    - hostcerts
+#    - firewall-zones
+#    - packages

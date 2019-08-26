@@ -1,0 +1,30 @@
+## Sets a firewalld rules for default ARGUS ports 
+## (PAP_PORT,PDP_PORT,PEPD_PORT = 8150,8152,8154)
+---
+- name: Enable TCP on internal ports for ARGUS  
+  firewalld:
+    zone: internal
+    port: "{{ item }}/tcp"
+    permanent: yes
+    state: enabled
+  with_items:
+    - "{{ PAP_PORT }}"
+    - "{{ PDP_PORT }}"
+    - "{{ PEPD_PORT }}"
+    - "{{ LDAP_PORT }}"
+  notify: Reload firewalld
+
+- name: Enable TCP on external ports for ARGUS 
+  firewalld:
+    zone: external
+    port: "{{ item }}/tcp"
+    permanent: yes
+    state: enabled
+  with_items:
+    - "{{ PAP_PORT }}"
+    - "{{ PDP_PORT }}"
+    - "{{ PEPD_PORT }}"
+    - "{{ LDAP_PORT }}"
+  notify: Reload firewalld
+...
+

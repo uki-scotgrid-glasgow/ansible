@@ -1,0 +1,26 @@
+## Baby HTCondor installer (worknodes)
+---
+- name: Installs and Configure an HTCondor worknode
+  hosts: newnodes
+  roles:
+    - common
+    - ansible-prereq
+    - time
+    - ssh-authorized-keys
+    - grid-security
+    - firewall-zones
+    - packages
+    - condor
+    - worknode
+    - cvmfs
+    - vo-atlas
+    - vo-dteam
+    - vo-gluex
+    - vo-ops
+    - vo-scotgrid
+
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml
+    - /etc/ansible/vars/mail.yml
+    - /etc/ansible/vars/secure.yml
+...

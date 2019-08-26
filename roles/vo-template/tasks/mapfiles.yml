@@ -1,0 +1,37 @@
+## Create map files in /etc/grid-security/
+---
+- name: Add lines to 'grid-mapfile' from local VO file
+  lineinfile:
+    path: /etc/grid-security/grid-mapfile
+    line: "{{ entry }} .{{ item.group | default(item.user_prefix) }}" 
+    state: present
+    create: yes
+  loop: "{{ lookup('file', '{{ item.user_prefix }}.grid-mapfile').splitlines() }}"
+  loop_control:
+    loop_var: entry
+  tags: vo
+
+
+- name: Add lines to 'groupmapfile' from local VO file
+  lineinfile:
+    path: /etc/grid-security/groupmapfile
+    line: "{{ entry }} {{ item.group | default(item.user_prefix) }}" 
+    state: present
+    create: yes
+  loop: "{{ lookup('file', '{{ item.user_prefix }}.groupmapfile').splitlines() }}"
+  loop_control:
+    loop_var: entry
+  tags: vo
+
+
+- name: Add lines to 'voms-grid-mapfile' from local VO file
+  lineinfile:
+    path: /etc/grid-security/voms-grid-mapfile
+    line: "{{ entry }} .{{ item.group | default(item.user_prefix) }}" 
+    state: present
+    create: yes
+  loop: "{{ lookup('file', '{{ item.user_prefix }}.grid-mapfile').splitlines() }}"
+  loop_control:
+    loop_var: entry
+  tags: vo
+...

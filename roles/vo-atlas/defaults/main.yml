@@ -1,0 +1,41 @@
+vo_name:           atlas
+
+vo_accounts:
+  - user_prefix:   atlas
+    gid:           3001
+    first_uid:     3001
+    num_accounts:  10
+
+  - user_prefix:   prdatlas
+    gid:           3002
+    first_uid:     3201
+    num_accounts:  10
+
+  - user_prefix:   pilatlas
+    gid:           3003
+    first_uid:     3401
+    num_accounts:  10
+
+  - user_prefix:   sgmatlas
+    gid:           3004
+    first_uid:     3601
+    num_accounts:  10
+
+vo_voms_servers:
+  - hostname: voms2.cern.ch
+    port: 15001
+    dn: /DC=ch/DC=cern/OU=computers/CN=voms2.cern.ch
+    ca_dn: /DC=ch/DC=cern/CN=CERN Grid Certification Authority
+
+  - hostname: lcg-voms2.cern.ch
+    port: 15001
+    dn: /DC=ch/DC=cern/OU=computers/CN=lcg-voms2.cern.ch
+    ca_dn: /DC=ch/DC=cern/CN=CERN Grid Certification Authority
+
+
+# Default directory locations
+fn_gridsec:        "/etc/grid-security"
+fn_mapdir:         "{{ fn_gridsec }}/gridmapdir"
+
+# Default values
+vo_default_id_format:   "%03d"

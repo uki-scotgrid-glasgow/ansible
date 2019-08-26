@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+
+# The export directive indicates which paths are to be exported. While the
+# default is '/tmp', we indicate it anyway to show you this directive.
+#
+#all.export /tmp
+{% for item in xrootd_exports %}
+all.export {{ item }}
+{% endfor %}
+
+# The adminpath and pidpath variables indicate where the pid and various
+# IPC files should be placed
+#
+all.adminpath /var/spool/xrootd
+all.pidpath /var/run/xrootd
+
+# More configuration files can be added in /etc/xrootd/config.d/                                                                                                             
+# For example /etc/xrootd/config.d/10-mygrid.cfg and                                                                                                                         
+# /etc/xrootd/config.d/98-mysite-specifics.cfg                                                                                                                               
+#                                                                                                                                                                            
+#continue /etc/xrootd/config.d/

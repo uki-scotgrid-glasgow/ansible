@@ -1,0 +1,5 @@
+## Install basic Squid Frontier package
+---
+- name: Install basic Squid Frontier package 
+  yum: name=frontier-squid state=installed
+...

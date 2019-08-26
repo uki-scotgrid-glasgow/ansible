@@ -1,0 +1,28 @@
+## Install CernVM-FS on worknode at ScotGrid Glasgow
+---
+- name: Install CernVM-FS
+  yum: name=cvmfs state=present
+
+- name: Install CernVM-FS config
+  yum: name=cvmfs-config-default state=present
+  notify: Restart autofs
+
+- name: Add CVMFS entry in /etc/auto.cvmfs
+  lineinfile:
+    path: /etc/auto.master
+    line: /cvmfs	/etc/auto.cvmfs
+    insertbefore: /net.*hosts
+  notify: Restart autofs
+
+- name: Configure /etc/cvmfs/default.local 
+  template: >
+    src=etc/cvmfs/default.local.j2
+    dest=/etc/cvmfs/default.local
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+  notify: Restart autofs
+
+- name: Create cache directory for CernVM-FS
+  file: path={{ CVMFS_CACHE_BASE }} owner=cvmfs group=root mode=775 state=directory force=true
+...

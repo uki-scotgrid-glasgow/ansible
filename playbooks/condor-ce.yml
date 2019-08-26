@@ -1,0 +1,21 @@
+## Install HTCondor-CE on a dedicated host (follow Steve's instructions)
+## https://github.com/gridpp/htcce/tree/master/ce
+---
+- name: Install pre-requisites + HTCondor-CE
+  hosts: condor-ce
+
+  roles:
+    - common
+    - ansible-prereq
+    - time
+    - ssh-authorized-keys
+    - hostcerts
+    - firewall-zones
+    - packages
+    - condor
+    - condor-ce
+
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml
+    - /etc/ansible/vars/mail.yml
+...

@@ -1,0 +1,38 @@
+- name: Create dnsmasq configuration files
+  template: src={{ item }}.j2 dest=/etc/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - dnsmasq.conf
+  notify:
+    - Restart dnsmasq
+
+
+- name: Create configuration directories
+  file: path={{ item }} state=directory owner=root group=root mode=0755
+  with_items:
+    - /etc/dnsmasq.hosts
+
+
+- name: Copy dnsmasq cnames files
+  copy: src={{ item }} dest=/etc/dnsmasq.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - cnames.conf
+  notify:
+    - Restart dnsmasq
+
+
+- name: Copy dnsmasq host files
+  copy: src={{ item }} dest=/etc/dnsmasq.hosts/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - 10.0.0.0_8
+  notify:
+    - Restart dnsmasq
+
+
+- name: Configure firewalld
+  firewalld: zone=internal service=dns permanent=yes immediate=yes state=enabled
+
+
+- name: Enable and start dnsmasq service
+  service: name={{ item }} enabled=yes state=started
+  with_items:
+    - dnsmasq

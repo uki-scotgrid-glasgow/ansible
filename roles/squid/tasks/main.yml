@@ -1,0 +1,14 @@
+## Squid main 
+---
+- include: sizevol.yml
+  tags: squid
+
+- include: install.yml
+  tags: squid
+
+- include: config.yml
+  tags: squid
+
+- include: start.yml
+  tags: squid
+...

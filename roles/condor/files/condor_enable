@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Stolen wholesale from the batchenable script on the pbs farm.
+#
+# Updated Mon Jul 21 09:57:05 BST 2014 so as not to kill CMS
+
+
+LOGGER="/usr/bin/env logger"
+CONDOR_RECONFIG="/usr/sbin/condor_reconfig"
+CONDOR_CONFIG_VAL="/usr/bin/condor_config_val"
+PARENT=`/bin/ps -p $PPID -o comm=`
+HOSTNAME=`hostname`
+
+# Prepare log message
+log_message="Batchenabled by $USER via $PARENT"
+
+if [ -n "$SSH_CLIENT" ]; then
+  log_message="${log_message} from $SSH_CLIENT"
+fi
+
+$CONDOR_CONFIG_VAL -startd -set "Startjobs = True"
+
+$CONDOR_RECONFIG -daemon startd
+
+# Submit log message to syslog
+$LOGGER $log_message
+
+exit 0

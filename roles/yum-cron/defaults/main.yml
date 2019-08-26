@@ -1,0 +1,4 @@
+yum_cron_mode:               default
+yum_cron_hourly_mode:        security
+yum_cron_apply:              true
+yum_cron_hourly_apply:       true

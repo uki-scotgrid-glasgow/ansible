@@ -1,0 +1,11 @@
+- name: Add a node_exporter group
+  group:
+      name: node_exporter
+      gid: 555
+
+
+- name: Add a node_exporter user
+  user:
+      name: node_exporter
+      uid: 555
+      group: node_exporter

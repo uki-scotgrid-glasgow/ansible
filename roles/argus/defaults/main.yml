@@ -1,0 +1,11 @@
+NGI_UK_HOSTNAME:   argusngi.gridpp.rl.ac.uk
+
+PAP_PORT:          8150
+PAPSDOWN_PORT:     8151
+PDP_PORT:          8152
+PDPADMIN_PORT:     8153
+PEPD_PORT:         8154
+PEPDADMIN_PORT:    8155
+LDAP_PORT:         2170
+
+fn_argus_policy:  your.file.policy

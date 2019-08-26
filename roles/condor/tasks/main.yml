@@ -1,0 +1,8 @@
+## Condor main
+---
+- include: install.yml 
+  tags: condor
+
+- include: config.yml 
+  tags: condor
+...

@@ -1,0 +1,26 @@
+## Install repositories for the ARC-CE
+---
+# ARC-CE & Key
+- name: NorduGrid GPG key
+  rpm_key: state=present key=http://download.nordugrid.org/RPM-GPG-KEY-nordugrid-6
+- name: NorduGrid repository
+  yum: 
+    name=https://download.nordugrid.org/packages/nordugrid-release/testing/6rc1/centos/el7/x86_64/nordugrid-release-6-0.rc1.el7.noarch.rpm 
+    state=present 
+
+# Add priority to nordugrid repo
+- name: Change priority to nordugrid repo
+  lineinfile:
+    path: /etc/yum.repos.d/{{ item.file }}
+    insertafter: enabled=1
+    line: priority=1
+  with_items:
+    - { file: 'nordugrid.repo' }
+    - { file: 'nordugrid-testing.repo' }
+    - { file: 'nordugrid-testing.repo.rpmnew' }
+    - { file: 'nordugrid-updates.repo' }
+
+## Enable NorduGrid-testing repo
+#- name: NorduGrid testing
+#  shell: yum-config-manager --enable nordugrid-testing
+...

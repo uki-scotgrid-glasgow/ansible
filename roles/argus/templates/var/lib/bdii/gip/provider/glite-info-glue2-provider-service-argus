@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# {{ ansible_managed }}
+
+##
+# Argus services GLUE 2 info provider
+##
+
+CONF_DIR=/etc/glite/info/service
+
+/usr/bin/glite-info-glue2-multi $CONF_DIR/glite-info-glue2-argus-pap.conf,$CONF_DIR/glite-info-glue2-argus-pdp.conf,$CONF_DIR/glite-info-glue2-argus-pep.conf argus-site $CONF_DIR/glite-info-glue2-service-argus.conf

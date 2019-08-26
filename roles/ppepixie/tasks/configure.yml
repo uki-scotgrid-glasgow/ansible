@@ -1,0 +1,6 @@
+- name: Enable and start DHCP service
+  service: name={{ item }} enabled=yes state=started
+  with_items:
+    - httpd
+    - tftp
+    - xinetd

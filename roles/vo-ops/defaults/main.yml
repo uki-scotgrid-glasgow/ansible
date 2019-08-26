@@ -1,0 +1,48 @@
+vo_name:           ops
+
+vo_accounts:
+  - user_prefix:   ops
+    gid:           2005
+    first_uid:     2201
+    num_accounts:  10
+
+  - user_prefix:   pilops
+    gid:           2006
+    first_uid:     2221
+    num_accounts:  10
+
+  - user_prefix:   sgmops
+    gid:           2007
+    first_uid:     2241
+    num_accounts:  10
+
+vo_voms_servers:
+  # svr008 only has vomsdir configuration for voms2 and lcg-voms2
+
+  #- hostname: lcg-voms.cern.ch
+  #  port: 15009
+  #  dn: /DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch
+  #  ca_dn: /DC=ch/DC=cern/CN=CERN Trusted Certification Authority
+
+  - hostname: lcg-voms2.cern.ch
+    port: 15009
+    dn: /DC=ch/DC=cern/OU=computers/CN=lcg-voms2.cern.ch
+    ca_dn: /DC=ch/DC=cern/CN=CERN Grid Certification Authority
+
+  #- hostname: voms.cern.ch
+  #  port: 15009
+  #  dn: /DC=ch/DC=cern/OU=computers/CN=voms.cern.ch
+  #  ca_dn: /DC=ch/DC=cern/CN=CERN Trusted Certification Authority
+
+  - hostname: voms2.cern.ch
+    port: 15009
+    dn: /DC=ch/DC=cern/OU=computers/CN=voms2.cern.ch
+    ca_dn: /DC=ch/DC=cern/CN=CERN Grid Certification Authority
+
+
+# Default directory locations
+fn_gridsec:        "/etc/grid-security"
+fn_mapdir:         "{{ fn_gridsec }}/gridmapdir"
+
+# Default values
+vo_default_id_format:   "%03d"

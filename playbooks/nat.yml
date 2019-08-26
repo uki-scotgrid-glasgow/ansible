@@ -1,0 +1,14 @@
+- hosts: nat
+  roles:
+    - common
+    - ansible-prereq
+    - time
+    - yum-cron
+    - ssh-authorized-keys
+    - firewall-zones
+    - packages
+    - ipforward
+    - conntrack-basic
+    - nat
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml

@@ -1,0 +1,27 @@
+# {{ ansible_managed }}
+
+# This configuration supports the bespoke condor_enable and condor_disable
+# commands which can be used to remove nodes from the pool for maintenance,
+# and add them again later.
+
+# Define persistent attribute which allows node to be enabled or disabled
+StartJobs = False
+STARTD_ATTRS = $(STARTD_ATTRS), StartJobs
+STARTD.SETTABLE_ATTRS_OWNER = StartJobs
+ENABLE_PERSISTENT_CONFIG = True
+PERSISTENT_CONFIG_DIR = {{ condor_persistent_dir }}
+
+# Run CONDOR_DISABLE each time Condor is started
+STARTD_CRON_JOBLIST = $(STARTD_CRON_JOBLIST) CONDOR_DISABLE
+STARTD_CRON_CONDOR_DISABLE_EXECUTABLE = {{ condor_script_dir }}/condor_disable
+STARTD_CRON_CONDOR_DISABLE_MODE = OneShot
+STARTD_CRON_CONDOR_DISABLE_RECONFIG = False
+STARTD_CRON_CONDOR_DISABLE_KILL = True
+
+# Run jobs only if node is healthy and not disabled
+START = (StartJobs =?= True)
+SUSPEND = False
+CONTINUE = True
+WANT_SUSPEND = $(SUSPEND)
+KILL = False
+PREEMPT = False

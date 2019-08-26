@@ -1,0 +1,12 @@
+## Enable ports
+---
+- name: Enable TCP on Internal port(s)
+  firewalld:
+    zone: internal
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - 9090/tcp
+  notify: Reload firewalld
+

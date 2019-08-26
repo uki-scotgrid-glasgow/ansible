@@ -1,0 +1,15 @@
+[Unit]
+Description=conntrack logging service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/sbin/conntrack -E -eNEW,DESTROY --src-nat -otimestamp,extended --buffer-size=104857600
+Restart=on-failure
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=conntrack
+
+[Install]
+WantedBy=multi-user.target

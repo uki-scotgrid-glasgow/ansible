@@ -1,0 +1,58 @@
+- name: Restart ARC-CE
+  shell: /usr/sbin/arcctl service restart --as-configured
+
+
+- name: Update Argus policy
+  debug: msg="*** Manual update of Argus policy required ***"
+
+
+- name: Restart autofs
+  service: name=autofs state=restarted
+
+
+- name: Restart BDII
+  service: name=bdii state=restarted
+
+
+- name: Restart chronyd
+  service: name=chronyd state=restarted
+
+
+- name: Reload Condor
+  service: name=condor state=reloaded
+
+
+- name: Restart Condor
+  service: name=condor state=restarted
+
+
+- name: Restart Condor-CE
+  service: name=condor-ce state=restarted
+
+
+- name: Restart DHCP
+  service: name=dhcpd state=restarted
+
+
+- name: Restart dnsmasq
+  service: name=dnsmasq state=restarted
+
+
+- name: Reload firewalld
+  service: name=firewalld state=reloaded
+
+
+- name: Restart rsyslog
+  service: name=rsyslog state=restarted
+
+
+- name: Restart SSH
+  service: name=sshd state=restarted
+
+
+- name: Reload sysctl
+  shell: /sbin/sysctl --system
+
+
+- name: Restart XRootD server (standalone)
+  service: name=xrootd@standalone state=restarted

@@ -1,0 +1,11 @@
+- hosts: monitoring 
+  roles:
+    - common
+    - ansible-prereq
+    - time
+    - yum-cron
+    - ssh-authorized-keys
+    - firewall-zones
+    - packages
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml

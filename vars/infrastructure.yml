@@ -1,0 +1,21 @@
+sg_domain_external:          some.domain.name
+sg_domain_internal:          beowulf.cluster
+
+sg_domain_search:
+  - "{{ sg_domain_internal }}"
+  - "{{ sg_domain_external }}"
+
+sg_site_name:                YOUR-SITE-NAME 
+
+argus_host:                  some.argus.host 
+
+squid_server_host:           some.squid.host 
+squid_server:                "{{ squid_server_host }}:3128"
+
+condor_manager_host:         some.condor.collector 
+condor_manager_ip:           10.X.X.X
+
+dns_ip_internal:             10.X.X.X
+
+time_server_ips:
+  - 10.X.X.X

@@ -1,0 +1,48 @@
+## Install and Configures GitLab
+---
+#Install and configure the necessary dependencies
+- name: GitLab dependencies
+  yum: pkg={{item}} state=latest 
+  with_items:
+    - curl
+    - policycoreutils-python 
+    - openssh-server 
+
+- name: Ensure SSHD is running and enabled.
+  service: name=sshd state=started enabled=yes
+
+#Something like: 'firewall-cmd --permanent --add-service=http'
+- name: Enable HTTP on firewalld (?) 
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+- name: Restart firewalld
+  service: name=firewalld state=restarted enabled=yes
+
+#Add the GitLab package repository --> break in 3 commands:  download, execute, delete
+#(download with 'get_url', execute with 'command', delete with 'file')
+- name: download GitLab repository script
+  get_url: url=https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh dest={{ TEMP_DIR }} mode=0755
+- name: execute GitLab repository script
+  command: bash /tmp/script.rpm.sh
+- name: delete GitLab repository script
+  file: path=/tmp/script.rpm.sh state=absent
+
+#Install the GitLab package
+- name: Install GitLab at {{ MY_URL }}
+  yum: pkg=gitlab-ee state=installed
+  environment:
+    EXTERNAL_URL: '{{ MY_URL }}'
+
+##Configure GitLab
+#- name: Create local configuration (all)
+#  template: src={{ item }}.j2 dest={{ config_dir }}/config.d/{{ item }} owner=root group=root mode=0644
+#  with_items:
+#    - bla
+#    - bla.config
+#    - mail.config
+
+#- name: reboot the machine
+#  reboot:
+...

@@ -1,0 +1,12 @@
+- name: Install firewalld
+  yum:
+    name:
+      - firewalld
+      - firewalld-filesystem
+    state: present
+
+
+- name: Enable and start firewalld service
+  service: name={{ item }} enabled=yes state=started
+  with_items:
+    - firewalld

@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+
+path = /usr/lib64/lcmaps
+
+verify_proxy = "lcmaps_verify_proxy.mod"
+                    "-certdir /etc/grid-security/certificates"
+                    "--discard_private_key_absence"
+                    "--allow-limited-proxy"
+
+pepc = "lcmaps_c_pep.mod"
+            "--pep-daemon-endpoint-url https://{{ argus_host }}:8154/authz"
+            "--resourceid http://gla.scotgrid.ac.uk/{{ inventory_hostname }}"
+            "--actionid http://glite.org/xacml/action/execute"
+            "--capath /etc/grid-security/certificates/"
+            "--certificate /etc/grid-security/hostcert.pem"
+            "--key /etc/grid-security/hostkey.pem"
+
+# Policies:
+arc:
+verify_proxy -> pepc
+

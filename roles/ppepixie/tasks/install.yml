@@ -1,0 +1,8 @@
+- name: Install PPE PiXiE dependencies
+  yum:
+    name:
+      - syslinux-tftpboot
+      - tftp
+      - tftp-server
+      - xinetd
+    state: present

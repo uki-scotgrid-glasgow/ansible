@@ -1,0 +1,12 @@
+## Install basic packages for new working nodes
+---
+- name: Install basic packages
+  yum:
+    name:
+      - HEP_OSlibs
+      - glexec-wn
+      - xrootd
+      - wn
+      - singularity
+    state: latest
+...

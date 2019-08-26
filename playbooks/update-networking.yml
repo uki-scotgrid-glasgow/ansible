@@ -1,0 +1,16 @@
+# This playbook can be used to push out DHCP or DNS changes to network services
+# hosts, with no attempt being made to make other changes to these systems.
+
+- hosts: dhcp
+  roles:
+    - common
+    - dhcp
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml
+
+- hosts: dns
+  roles:
+    - common
+    - dnsmasq
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml

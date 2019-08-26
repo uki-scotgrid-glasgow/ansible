@@ -1,0 +1,11 @@
+/var/log/conntrack {
+    daily
+    rotate 30
+    compress
+    size 25M
+    postrotate
+        # before using this, run the command yourself to make sure 
+        # it is right... the daemon name may vary
+        /usr/bin/systemctl stop conntrack-log; /usr/bin/systemctl start conntrack-log; /usr/bin/systemctl restart rsyslog
+    endscript
+}

@@ -1,0 +1,16 @@
+## node_exporter installer (Prometheus monitoring tool)
+---
+- hosts: compute 
+  roles:
+    - common
+    - ansible-prereq
+    - time
+    - yum-cron
+    - ssh-authorized-keys
+    - firewall-zones
+    - packages
+    - node_exporter
+
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml
+...

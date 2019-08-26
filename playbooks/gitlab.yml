@@ -1,0 +1,16 @@
+## Install GitLab repository server
+---
+- hosts: gitlab
+  roles: 
+    - common
+    - ansible-prereq
+    - yum-cron
+    - ssh-authorized-keys
+    - packages
+    - gitlab
+
+  vars:
+   MY_URL: http://gitlab.beowulf.cluster
+   TEMP_DIR: /tmp/
+   #config_dir: ...
+...

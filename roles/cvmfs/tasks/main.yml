@@ -1,0 +1,8 @@
+## CernVM-FS main 
+---
+- include: autofs.yml
+  tags: cvmfs
+
+- include: cvmfs.yml
+  tags: cvmfs
+...

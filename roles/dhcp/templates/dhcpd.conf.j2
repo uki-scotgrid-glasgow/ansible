@@ -1,0 +1,80 @@
+# {{ ansible_managed }}
+
+# dhcpd.conf
+
+allow booting;
+allow bootp;
+
+# Logging
+log-facility {{ dhcp_log_facility }};
+
+# The ddns-updates-style parameter controls whether or not the server will
+# attempt to do a DNS update when a lease is confirmed.
+ddns-update-style none;
+
+# DHCP server should send DHCPNAK messages to misconfigured clients.
+authoritative;
+
+# Direct grub booting
+option grub-conf code 150 = text;
+
+# MS routes: adds extras to supplement routers option
+option ms-classless-static-routes code 249 = array of integer 8;
+# RFC3442 routes: overrides routers option
+option classless-static-routes code 121 = array of integer 8;
+
+option space PXE;
+option PXE.mtftp-ip code 1 = ip-address;
+option PXE.mtftp-oport code 2 = unsigned integer 16;
+option PXE.mtftp-sport code 3 = unsigned integer 16;
+option PXE.mtftp-tmout code 4 = unsigned integer 8;
+option PXE.mtftp-delay code 5 = unsigned integer 8;
+option PXE.discovery-control code 6 = unsigned integer 8;
+option PXE.discovery-mcast-addr code 7 = unsigned integer 8;
+option PXE.boot-server code 8 = { unsigned integer 16, unsigned integer 8, ip-address };
+option PXE.boot-menu code 9 = { unsigned integer 16, unsigned integer 8, text};
+option PXE.menu-prompt code 10 = { unsigned integer 8, text };
+
+option pxe-system-type code 93 = unsigned integer 16;
+
+shared-network dhcp-wire-net {
+  # Common configuration
+  option domain-name   "{{ sg_domain_internal }}";
+  option domain-search "{{ sg_domain_search | join("\", \"") }}";
+
+  # PXE
+  option vendor-encapsulated-options 01:04:00:00:00:00:FF;
+  option vendor-class-identifier "PXEClient";
+
+  # Legacy PXE configuration (Cobbler)
+#  if option pxe-system-type = 00:02 {
+#          filename "ia64/elilo.efi";
+#  } else if option pxe-system-type = 00:06 {
+#          filename "grub/grub-x86.efi";
+#  } else if option pxe-system-type = 00:07 {
+#          # CentOS 7
+#          filename "/grub/grubx64.efi";
+#          # SL 6
+#          #filename "/grub/BOOTX64.efi";
+#  } else if option pxe-system-type = 00:09 {
+#          #filename "grub/grub-x86_64.efi";
+#          filename "/grub/grubx64.efi";
+#  } else {
+#          filename "/pxelinux.0";
+#  }
+
+  # =======================================
+  # IP Subnets
+
+  # 10.0.0.0/8
+  subnet 10.0.0.0 netmask 255.0.0.0 {
+    option domain-name-servers {{ dns_ip_internal }};
+    # Gateway: nat006
+    option routers 10.X.X.X;
+    # Lease: 1 day default, 5 day maximum
+    default-lease-time 86400;
+    max-lease-time 432000;
+  }
+
+  include "/etc/dhcp/hosts.conf";
+}

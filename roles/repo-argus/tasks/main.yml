@@ -1,0 +1,9 @@
+# Argus repo (http://repository.egi.eu/2017/08/10/argus-1-7-3/)
+---
+- name: Configure Argus repository
+  yum_repository:
+    name: EGI-Argus
+    description: EGI-Argus repo
+    baseurl: http://argus-authz.github.io/repo/stable/el7/RPMS/
+    enabled: yes
+...

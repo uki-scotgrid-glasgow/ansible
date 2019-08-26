@@ -1,0 +1,11 @@
+# Updates '/etc/arc.conf' to allow the new VO
+---
+- name: Add advertisedvo entry to arc.conf
+  lineinfile:
+    path: /etc/arc.conf
+    line: "advertisedvo = {{ vo_name }}"
+    insertafter: "^\\[infosys/cluster\\]$"
+    state: present
+  tags: vo
+  notify: Restart ARC-CE
+...

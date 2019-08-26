@@ -1,0 +1,2 @@
+- name: Enable NAT for internal zone
+  firewalld: permanent=yes immediate=true zone=internal masquerade=yes state=enabled

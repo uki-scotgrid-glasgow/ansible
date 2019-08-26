@@ -1,0 +1,10 @@
+## Resizes the local volume to allocate enough space on /var/ (which is in /)
+---
+- name: Extend local volume / to {{ CACHE_MEM }}*{{ WORKERS }} = {{ TOT_SIZE }}
+  lvol:
+    vg: centos
+    lv: root
+#    size: +100%FREE
+    size: "{{ TOT_SIZE }}"
+    shrink: no
+...

@@ -1,0 +1,13 @@
+## Copies the appropriate host certificate and key into the '/etc/grid-security/' folder.
+## Host certificates must be placed in ../files/ with the following naming convention:
+##  Certificate:  host.gla.scotgrid.ac.uk_cert.pem
+##  Private Key:  host.gla.scotgrid.ac.uk_key.pem
+---
+- name: Copy host certificate
+  copy: src="{{ inventory_hostname }}.gla.scotgrid.ac.uk_cert.pem" dest=/etc/grid-security/hostcert.pem owner=root group=root mode=0644
+  tags: hostcerts
+
+- name: Copy host key
+  copy: src="{{ inventory_hostname }}.gla.scotgrid.ac.uk_key.pem" dest=/etc/grid-security/hostkey.pem owner=root group=root mode=0400
+  tags: hostcerts
+...

@@ -1,0 +1,6 @@
+- include: install.yml
+  tags: yum-cron
+
+
+- include: configure.yml
+  tags: yum-cron

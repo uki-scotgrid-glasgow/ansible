@@ -1,0 +1,6 @@
+- name: Install DHCP
+  yum:
+    name:
+      - dhcp
+      - dhcp-common
+    state: present

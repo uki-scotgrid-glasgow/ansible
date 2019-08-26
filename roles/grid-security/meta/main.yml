@@ -1,0 +1,4 @@
+dependencies:
+#  - { role: repo-egi-trustanchors }
+  - { role: repo-umd4 }
+  - { role: repo-epel }

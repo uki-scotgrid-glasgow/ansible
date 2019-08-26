@@ -1,0 +1,58 @@
+## Configures and starts HTCondor (minimal configuration)
+---
+# Configures HTCondor 
+- name: Create local configuration 
+  template: src={{ item }}.j2 dest={{ condor_config_dir }}/config.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - 01-daemons.config
+    - security.config
+#    - network.config
+#    - condor-view.config
+#    - eventlog.config
+#    - job-defaults.config
+#    - mail.config
+  notify: Reload Condor
+
+- name: Create local configuration (worknode)
+  template: src={{ item }}.j2 dest={{ condor_config_dir }}/config.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - condor-disable.config
+    - wn.config
+  when: inventory_hostname in groups['newnodes']
+  notify: Reload Condor
+
+- name: Create Condor persistent configuration directory
+  file: path={{ condor_persistent_dir }} state=directory owner=root group=root
+  when: inventory_hostname in groups['newnodes']
+
+- name: Password file (copy it over)
+  template: src=pool_password dest={{ condor_config_dir }}/pool_password owner=root group=root mode=0600
+  notify: Reload Condor
+
+- name: Create history directory
+  file: path={{ condor_history_dir }} state=directory owner=condor group=condor
+
+- name: Enable TCP on port 9618 
+  firewalld:
+    port: 9618/tcp
+    permanent: yes
+    state: enabled
+    zone: internal
+  notify: Reload firewalld
+
+- name: Enable TCP on ports (default 30000-32000)
+  firewalld:
+    port: "{{ condor_port_first }}-{{ condor_port_last }}/tcp"
+    permanent: yes
+    state: enabled
+    zone: internal
+  notify: Reload firewalld
+
+# Start it running
+- name: Starts and Enables HTCondor
+  systemd:
+    name: condor
+    enabled: yes
+    state: started
+...
+

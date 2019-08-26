@@ -1,0 +1,6 @@
+# Configures Squid Frontier
+---
+- name: Copy custom script to '/etc/squid/customize.sh'
+  template: src=etc/squid/customize.sh.j2 dest=/etc/squid/customize.sh owner=root group=root mode=0755
+...
+

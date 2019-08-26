@@ -1,0 +1,36 @@
+vo_name:           dteam
+
+vo_accounts:
+  - user_prefix:   dteam
+    gid:           2002
+    first_uid:     2101
+    num_accounts:  10
+
+  - user_prefix:   prddteam
+    gid:           2003
+    first_uid:     2121
+    num_accounts:  10
+
+  - user_prefix:   sgmdteam
+    gid:           2004
+    first_uid:     2141
+    num_accounts:  10
+
+vo_voms_servers:
+  - hostname: voms.hellasgrid.gr
+    port: 15004
+    dn: /C=GR/O=HellasGrid/OU=hellasgrid.gr/CN=voms.hellasgrid.gr
+    ca_dn: /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid CA 2016
+
+  - hostname: voms2.hellasgrid.gr
+    port: 15004
+    dn: /C=GR/O=HellasGrid/OU=hellasgrid.gr/CN=voms2.hellasgrid.gr
+    ca_dn: /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid CA 2016
+
+
+# Default directory locations
+fn_gridsec:        "/etc/grid-security"
+fn_mapdir:         "{{ fn_gridsec }}/gridmapdir"
+
+# Default values
+vo_default_id_format:   "%03d"

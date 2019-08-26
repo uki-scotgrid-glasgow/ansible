@@ -1,0 +1,28 @@
+## Install ARC-CE v6
+## http://www.nordugrid.org/arc/arc6/admins/try_arc6.html
+---
+- name: Install pre-requisites + ARC-CE
+  hosts: ce
+
+  roles:
+    - common
+    - ansible-prereq
+    - time
+    - yum-cron
+    - ssh-authorized-keys
+    - grid-security
+    - hostcerts
+    - firewall-zones
+    - packages
+    - cvmfs
+    - condor
+    - arc-ce
+    - vo-atlas
+    - vo-dteam
+    - vo-gluex
+    - vo-ops
+    - vo-scotgrid
+
+  vars_files:
+    - /etc/ansible/vars/infrastructure.yml
+    - /etc/ansible/vars/mail.yml

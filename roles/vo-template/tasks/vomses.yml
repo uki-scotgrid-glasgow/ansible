@@ -1,0 +1,10 @@
+# Create vomses configuration on worker nodes
+---
+- name: Create VOMS directory
+  file: path={{ item }} state=directory owner=root group=root mode=0755
+  with_items:
+    - "/etc/vomses"
+
+- name: Create VOMS entries
+  template: src=vomses.j2 dest=/etc/vomses/{{ vo_name }} owner=root group=root mode=0644
+...

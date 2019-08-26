@@ -1,0 +1,7 @@
+- hosts: provisioning
+  roles:
+    - ansible-prereq
+    - yum-cron
+    - ssh-authorized-keys
+    - packages
+    - ppepixie

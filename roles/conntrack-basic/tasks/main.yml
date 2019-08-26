@@ -1,0 +1,29 @@
+# NAT connection tracking, inspired by:
+#
+# https://blogs.it.ox.ac.uk/networks/2014/09/30/linux-and-eduroam-nat-logging-perl-and-regular-expressions/
+
+- name: Install conntrack packages
+  yum: name=conntrack-tools state=present
+  tags: conntrack
+
+
+- name: Copy conntrack systemd service definition
+  copy: src={{ item }} dest=/etc/systemd/system/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - conntrack-log.service
+  tags: conntrack
+
+
+- name: Copy conntrack rsyslog configuration
+  copy: src={{ item }} dest=/etc/rsyslog.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - conntrack.conf
+  tags: conntrack
+  notify: Restart rsyslog
+
+
+- name: Copy conntrack logrotate configuration
+  copy: src={{ item }} dest=/etc/logrotate.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - conntrack
+  tags: conntrack

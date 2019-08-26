@@ -1,0 +1,6 @@
+- include: install.yml
+  tags: dns
+
+
+- include: configure.yml
+  tags: dns

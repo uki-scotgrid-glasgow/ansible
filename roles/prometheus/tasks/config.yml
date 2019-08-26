@@ -1,0 +1,28 @@
+- name: Install prometheus service description
+  copy:
+      src: prometheus.service
+      dest: /etc/systemd/system/prometheus.service
+      owner: root
+      group: root
+      mode: '0644'
+
+- name: Create prometheus directories
+  file:
+      path: "{{ item }}"
+      state: directory
+      owner: prometheus
+      group: prometheus
+      mode: '0755' 
+  with_items:
+      - /etc/prometheus
+      - /var/lib/prometheus
+      - /etc/prometheus/consoles
+      - /etc/prometheus/consoles_libraries
+
+- name: Install prometheus config file
+  copy:
+      src: prometheus.yml
+      dest: /etc/prometheus/prometheus.yml
+      owner: prometheus
+      group: prometheus
+      mode: '0644'

@@ -1,0 +1,6 @@
+- name: Start and Enable the prometheus service
+  systemd:
+      name: prometheus
+      daemon_reload: yes
+      state: started
+      enabled: yes
