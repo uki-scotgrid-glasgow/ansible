@@ -17,7 +17,6 @@
   with_items:
     - { file: 'nordugrid.repo' }
     - { file: 'nordugrid-testing.repo' }
-    - { file: 'nordugrid-testing.repo.rpmnew' }
     - { file: 'nordugrid-updates.repo' }
 
 ## Enable NorduGrid-testing repo
